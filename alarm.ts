@@ -9,6 +9,8 @@ export class Alarm {
     this.isAlarm = false;
     this.time = time;
     this.startInterval();
+    const amStr: string = time.isAM ? "AM" : "PM";
+    console.log("Alarm set for " + this.time.hour + ":" + this.time.minute.toString().padStart(2, '0') + " " + amStr + ".");
   }
 
   public stopInterval(): void {
@@ -37,6 +39,9 @@ export class Alarm {
     if (hour > 12) {
       hour = hour - 12;
       isAM = false;
+    }
+    else if (hour == 0) {
+      hour = 12;
     }
     if (this.time.minute == minute && this.time.hour == hour && this.time.isAM == isAM) {
       return true;

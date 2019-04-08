@@ -16,7 +16,7 @@ app(
     }
 
     const amStr: string = time.isAM ? "AM" : "PM";
-    return [200, "Alarm set for " + time.hour + ":" + time.minute + " " + amStr + "."];
+    return [200, "Alarm set for " + time.hour + ":" + time.minute.toString().padStart(2, '0') + " " + amStr + "."];
   }),
   get('/stop', () => {
     alarm.stopAlarm();
