@@ -1,6 +1,6 @@
 const express = require('express');
-const Time = require('../time.js/index.js');
-const Alarm = require('./alarm.js/index.js');
+const Time = require('./time.js');
+const Alarm = require('./alarm.js');
 const app = express();
 const port = 8080;
 
