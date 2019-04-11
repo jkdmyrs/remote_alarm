@@ -32,7 +32,7 @@ class Alarm {
       hour = 12;
     }
     let minute = curDate.getMinutes();
-    let timeStr = `${hour.toString()}${minute.toString()}${isAM ? 'a' : 'p'}`;
+    let timeStr = `${hour.toString()}${minute.toString().padStart(2,'0')}${isAM ? 'a' : 'p'}`;
     let curTime = new Time(timeStr);
     return this.time.compare(curTime);
   }
