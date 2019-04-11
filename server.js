@@ -18,7 +18,6 @@ app.get('/time/:time', (req, res) => {
   let time;
   try {
     time = new Time(req.params.time);
-    console.log(time.timeString);
     alarm.setAlarm(time);
     res.send(`Alarm set for ${time.timeString}`);
   } catch (e) {
