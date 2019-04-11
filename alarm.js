@@ -24,12 +24,11 @@ class Alarm {
   checkAlarmTime() {
     const curDate = new Date();
     let hour = curDate.getHours();
-    let isAM;
+    let isAM = true;
     if (hour > 12) {
       hour = hour - 12;
       isAM = false;
     } else if (hour == 0) {
-      isAM = true;
       hour = 12;
     }
     let minute = curDate.getMinutes();
