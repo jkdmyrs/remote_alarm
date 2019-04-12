@@ -26,7 +26,7 @@ class Time {
   }
 
   get timeString() {
-    return `${this.hour}:${this.minute.toString().padStart(2, '0')} ${this.isAM ? "AM" : "PM"}`;
+    return `${this.hour.toString().padStart(2,'0')}${this.minute.toString().padStart(2, '0')}${this.isAM ? "a" : "p"}`;
   }
 }
 
