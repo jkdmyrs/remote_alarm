@@ -15,35 +15,169 @@ const com2 = new gpio(10, 'out');
 const com3 = new gpio(11, 'out');
 const com4 = new gpio(12, 'out');
 
-const ON = 0;
-const OFF = 1;
+const COMMON_ON = 0;
+const COMMON_OFF = 1;
 
-setInterval(() => {
-	if (com1.readSync() == ON) {
-		com1.writeSync(OFF);
-		com2.writeSync(ON);
-		com3.writeSync(OFF);
-		com4.writeSync(OFF);
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-		segA.writeSync(1);
-		segB.writeSync(1);
-		segC.writeSync(1);
-		segD.writeSync(0);
-		segE.writeSync(0);
-		segF.writeSync(1);
-		segG.writeSync(1);
-	} else {
-		com1.writeSync(ON);
-		com2.writeSync(OFF);
-		com3.writeSync(OFF);
-		com4.writeSync(OFF);
+function disable() {
+	com1.writeSync(COMMON_OFF);
+	com2.writeSync(COMMON_OFF);
+	com3.writeSync(COMMON_OFF);
+	com4.writeSync(COMMON_OFF);
+}
 
-		segA.writeSync(1);
-		segB.writeSync(1);
-		segC.writeSync(1);
-		segD.writeSync(0);
-		segE.writeSync(0);
-		segF.writeSync(1);
-		segG.writeSync(1);			
-	}	
-}, 10);
+function setNumber(number) {
+	switch (number) {
+		case 0:
+			segA.writeSync(1);
+			segB.writeSync(1);
+			segC.writeSync(1);
+			segD.writeSync(1);
+			segE.writeSync(1);
+			segF.writeSync(1);
+			segG.writeSync(0);
+			break;
+		case 1:
+			segA.writeSync(0);
+			segB.writeSync(1);
+			segC.writeSync(1);
+			segD.writeSync(0);
+			segE.writeSync(0);
+			segF.writeSync(0);
+			segG.writeSync(0);
+			break;
+		case 2:
+			segA.writeSync(1);
+			segB.writeSync(1);
+			segC.writeSync(0);
+			segD.writeSync(1);
+			segE.writeSync(1);
+			segF.writeSync(0);
+			segG.writeSync(1);
+			break;
+		case 3:
+			segA.writeSync(1);
+			segB.writeSync(1);
+			segC.writeSync(1);
+			segD.writeSync(1);
+			segE.writeSync(0);
+			segF.writeSync(0);
+			segG.writeSync(1);
+			break;
+		case 4:
+			segA.writeSync(0);
+			segB.writeSync(1);
+			segC.writeSync(1);
+			segD.writeSync(0);
+			segE.writeSync(0);
+			segF.writeSync(1);
+			segG.writeSync(1);
+			break;
+		case 5:
+			segA.writeSync(1);
+			segB.writeSync(0);
+			segC.writeSync(1);
+			segD.writeSync(1);
+			segE.writeSync(0);
+			segF.writeSync(1);
+			segG.writeSync(1);
+			break;
+		case 6:
+			segA.writeSync(1);
+			segB.writeSync(0);
+			segC.writeSync(1);
+			segD.writeSync(1);
+			segE.writeSync(1);
+			segF.writeSync(1);
+			segG.writeSync(1);
+			break;
+		case 7:
+			segA.writeSync(1);
+			segB.writeSync(1);
+			segC.writeSync(1);
+			segD.writeSync(0);
+			segE.writeSync(0);
+			segF.writeSync(0);
+			segG.writeSync(0);
+			break;
+		case 8:
+			segA.writeSync(1);
+			segB.writeSync(1);
+			segC.writeSync(1);
+			segD.writeSync(1);
+			segE.writeSync(1);
+			segF.writeSync(1);
+			segG.writeSync(1);
+			break;
+		case 9:
+			segA.writeSync(1);
+			segB.writeSync(1);
+			segC.writeSync(1);
+			segD.writeSync(0);
+			segE.writeSync(0);
+			segF.writeSync(1);
+			segG.writeSync(1);
+			break;
+		default:
+			break;
+	}
+}
+
+function setDisplay(display) {
+	switch (display) {
+		case 1:
+			com1.writeSync(COMMON_ON);
+			com2.writeSync(COMMON_OFF);
+			com3.writeSync(COMMON_OFF);
+			com4.writeSync(COMMON_OFF);
+			break;
+		case 2:
+			com1.writeSync(COMMON_OFF);
+			com2.writeSync(COMMON_ON);
+			com3.writeSync(COMMON_OFF);
+			com4.writeSync(COMMON_OFF);
+			break;
+		case 3:
+			com1.writeSync(COMMON_OFF);
+			com2.writeSync(COMMON_OFF);
+			com3.writeSync(COMMON_ON);
+			com4.writeSync(COMMON_OFF);
+			break;
+		case 4:
+			com1.writeSync(COMMON_OFF);
+			com2.writeSync(COMMON_OFF);
+			com3.writeSync(COMMON_OFF);
+			com4.writeSync(COMMON_ON);
+			break;
+		default:
+			break;
+	}
+}
+
+function display(display, number) {
+	disable();
+	setNumber(number);
+	setDisplay(display);
+}
+
+async function show(num1, num2, num3, num4) {
+	display(1, num1);
+	await sleep(5);
+	display(3, num3);
+	await sleep(5);
+	display(4, num4);
+	await sleep(5);
+	display(2, num2);
+	await sleep(5);
+}
+
+async function main() {
+	while(true) {
+		await show(0,0,0,0);
+	}
+}
+
+main();
