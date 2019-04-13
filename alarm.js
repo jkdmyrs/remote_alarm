@@ -19,8 +19,8 @@ class Alarm {
   }
 
   stopAlarm() {
-    this.time = null;
     this.isAlarmOn = false;
+    clearInterval(this.alarmID);
     this.alarmOut.writeSync(0);
     console.log("Alarm stopped");
   }
