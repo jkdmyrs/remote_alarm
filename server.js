@@ -11,10 +11,10 @@ const alarm = new Alarm();
 const clock = new Clock();
 
 app.get('/', (req, res) => {
-  if (alarm.time != null) {
-    res.send(`Alarm set for ${alarm.time.timeString} \n`);
+  if (alarm.isAlarmSet) {
+    res.send(`Alarm set for ${Utilities.formatTimeString(alarm.time.timeString)} \n`);
   } else {
-    res.send("Alarm not set. \n");
+    res.send("Alarm not set \n");
   }
 })
 
@@ -23,7 +23,7 @@ app.get('/time/:time', (req, res) => {
   try {
     time = new Time(req.params.time);
     alarm.setAlarm(time);
-    res.send(`Alarm set for ${Utilities.formatTimeString(time.timeString)} \n`);
+    res.redirect('../../');
   } catch (e) {
     console.log(e);
     res.send("Invalid Time \n");
@@ -32,7 +32,7 @@ app.get('/time/:time', (req, res) => {
 
 app.get('/stop', (req, res) => {
   alarm.stopAlarm();
-  res.send("Alarm disabled. \n");
+  res.redirect('../');
 })
 
 app.listen(port, () => console.log(`App running on port ${port}`));
