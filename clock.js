@@ -14,6 +14,7 @@ class Clock {
     this.segE = new gpio(27, 'out');
     this.segF = new gpio(3, 'out');
     this.segG = new gpio(10, 'out');
+    this.segColon = new gpio(13, 'out');
 
     // define common pins
     this.com1 = new gpio(9, 'out');
@@ -37,7 +38,18 @@ class Clock {
   _display(display, number) {
     this._disable();
     this._setDisplay(display);
-    this._setNumber(number);
+    if (display == 1 && number == 0) {
+      this._disable();
+    } else {
+      this._setNumber(number);
+    }
+    if (display == 2) {
+      this._enableColon();
+    }
+  }
+  
+  _enableColon() {
+    this.segColon.writeSync(1);
   }
 
   _disable() {
@@ -48,6 +60,7 @@ class Clock {
     this.segE.writeSync(0);
     this.segF.writeSync(0);
     this.segG.writeSync(0);
+    this.segColon.writeSync(0);
   }
 
   _setNumber(number) {
