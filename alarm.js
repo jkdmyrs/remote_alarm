@@ -1,5 +1,6 @@
 const Time = require('./time.js');
 const Utilities = require('./utilities.js');
+const gpio = require('onoff').Gpio;
 
 class Alarm {
 
@@ -7,6 +8,8 @@ class Alarm {
     this.time = null;
     this.alarmID = null;
     this.isAlarmOn = false;
+    this.alarmOut = new gpio(21, 'out');
+    this.alarmOut.writeSync(0);
   }
 
   setAlarm(time) {
@@ -18,6 +21,7 @@ class Alarm {
   stopAlarm() {
     this.time = null;
     this.isAlarmOn = false;
+    this.alarmOut.writeSync(0);
     console.log("Alarm stopped");
   }
 
@@ -44,6 +48,7 @@ class Alarm {
 
   _triggerAlarm() {
     clearInterval(this.alarmID);
+    this.alarmOut.writeSync(1);
     console.log("Alarm triggered.");
   }
 }
