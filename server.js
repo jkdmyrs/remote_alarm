@@ -2,11 +2,13 @@ const express = require('express');
 const Time = require('./time.js');
 const Alarm = require('./alarm.js');
 const Utilities = require('./utilities.js');
+const Clock = require('./clock.js');
 
 const app = express();
 const port = 8080;
 
 const alarm = new Alarm();
+const clock = new Clock();
 
 app.get('/', (req, res) => {
   if (alarm.time != null) {
