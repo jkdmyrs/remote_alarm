@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Remote Alarm</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container-fluid">
+
+    <div class="row pt-2 pl-2 dark-color">
+      <div class="col">
+        <h2>Remote Alarm</h2>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container top-margin">
+
+    <div class="jumbotron p-3 pb-4">
+      <h1 class="display-4" id="remote_alarm_status"></h1>
+      <hr class="my-4">
+
+      <div class="row">
+        <div class="col-7 col-sm-9 col-md-10">
+          <input id="time_input" class="form-control" />
+        </div>
+        <div class="col-5 col-sm-3 col-md-2">
+          <button class="btn btn-primary" id="time_button">Set Alarm</button>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col d-flex justify-content-center">
+          <button class="btn btn-danger" id="stop_button">Disable Alarm</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"
+    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

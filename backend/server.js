@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const Time = require('./time.js');
 const Alarm = require('./alarm.js');
 const Utilities = require('./utilities.js');
@@ -7,18 +8,20 @@ const Clock = require('./clock.js');
 const app = express();
 const port = 8080;
 
+app.use(cors());
+
 const alarm = new Alarm();
 const clock = new Clock();
 
 app.get('/', (req, res) => {
   if (alarm.isAlarmSet) {
-    res.send(`Alarm set for ${Utilities.formatTimeString(alarm.time.timeString)} \n`);
+    res.send(`Alarm set for ${Utilities.formatTimeString(alarm.time.timeString)}`);
   } else {
-    res.send("Alarm not set \n");
+    res.send("Alarm not set");
   }
 })
 
-app.get('/time/:time', (req, res) => {
+app.post('/time/:time', (req, res) => {
   let time;
   try {
     time = new Time(req.params.time);
@@ -26,11 +29,11 @@ app.get('/time/:time', (req, res) => {
     res.redirect('../../');
   } catch (e) {
     console.log(e);
-    res.send("Invalid Time \n");
+    res.send("Invalid Time");
   }
 });
 
-app.get('/stop', (req, res) => {
+app.post('/stop', (req, res) => {
   alarm.stopAlarm();
   res.redirect('../');
 })
