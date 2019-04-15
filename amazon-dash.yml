@@ -1,0 +1,8 @@
+settings:
+  delay: 10
+devices:
+  74:C2:46:45:95:AE:
+    name: IoT_btn_alarm
+    url: 'http://localhost:8080/stop'
+    method: POST
+    headers: { "authorization": "a13761dd1a4d4289802922ae114f51bb" } 

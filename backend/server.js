@@ -34,7 +34,19 @@ app.post('/time/:time', (req, res) => {
 });
 
 app.post('/stop', (req, res) => {
-  alarm.stopAlarm();
+  let canDisable = false;
+  if (alarm.isAlarmTriggered) {
+    const authHeader = req.headers["authorization"];
+    if (authHeader == "a13761dd1a4d4289802922ae114f51bb") {
+      canDisable = true;
+    }
+  } else {
+    canDisable = true;
+  }
+  
+  if (canDisable) {
+    alarm.stopAlarm();
+  }
   res.redirect('../');
 })
 
